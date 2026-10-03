@@ -4,7 +4,7 @@ This project is a modular RESTful Book and Author Management API developed using
 
 I wrote this software to demonstrate practical JavaScript backend architecture, recursive data parsing, and functional data manipulation using modern ES6 features. The application parses nested category taxonomies from database records, aggregates catalog statistics, and provides interactive API documentation.
 
-[Software Demo Video]([(https://www.loom.com/share/30ecc625d7ba4d9fb93aaac8c76c17b4))
+[Software Demo Video](https://www.loom.com/share/30ecc625d7ba4d9fb93aaac8c76c17b4)
 
 # Development Environment
 
