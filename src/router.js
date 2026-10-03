@@ -1,11 +1,12 @@
 import express from 'express';
 import {
-  getBooksHandler,
-  getBookByIdHandler,
-  createBookHandler,
-  updateBookHandler,
-  deleteBookHandler
-} from './controllers/books.js';
+  getAllBooks,
+  getBookById,
+  getBookAnalytics,
+  createBook,
+  updateBook,
+  deleteBook
+} from './controllers/controller-books.js';
 import {
   getAllAuthors,
   getAuthorById,
@@ -15,6 +16,29 @@ import {
 } from './controllers/authors.js';
 
 const router = express.Router();
+
+/**
+ * @openapi
+ * /books/analytics:
+ *   get:
+ *     summary: Retrieve catalog statistics and hierarchical category breakdown
+ *     description: Demonstrates native ES6 array methods (filter, map, reduce) and recursive taxonomy traversal.
+ *     tags:
+ *       - Books
+ *     parameters:
+ *       - in: query
+ *         name: genre
+ *         required: false
+ *         schema:
+ *           type: string
+ *         description: Optional genre to filter statistics
+ *     responses:
+ *       200:
+ *         description: Analytics calculated successfully
+ *       500:
+ *         description: Failed to generate analytics
+ */
+router.get('/books/analytics', getBookAnalytics);
 
 /**
  * @openapi
@@ -29,7 +53,7 @@ const router = express.Router();
  *       500:
  *         description: Unable to retrieve books
  */
-router.get('/books', getBooksHandler);
+router.get('/books', getAllBooks);
 
 /**
  * @openapi
@@ -53,7 +77,7 @@ router.get('/books', getBooksHandler);
  *       500:
  *         description: Unable to retrieve book
  */
-router.get('/books/:id', getBookByIdHandler);
+router.get('/books/:id', getBookById);
 
 /**
  * @openapi
@@ -82,11 +106,17 @@ router.get('/books/:id', getBookByIdHandler);
  *                 type: string
  *               publicationDate:
  *                 type: string
+ *               genre:
+ *                 type: string
+ *               pages:
+ *                 type: number
  *           example:
  *             id: b4
  *             authorId: a1
  *             title: Example Book Title
  *             publicationDate: 2026-01-15
+ *             genre: Fiction
+ *             pages: 350
  *     responses:
  *       201:
  *         description: Book created successfully
@@ -95,7 +125,7 @@ router.get('/books/:id', getBookByIdHandler);
  *       500:
  *         description: Unable to create book
  */
-router.post('/books', createBookHandler);
+router.post('/books', createBook);
 
 /**
  * @openapi
@@ -128,10 +158,16 @@ router.post('/books', createBookHandler);
  *                 type: string
  *               publicationDate:
  *                 type: string
+ *               genre:
+ *                 type: string
+ *               pages:
+ *                 type: number
  *           example:
  *             authorId: a2
  *             title: Updated Book Title
  *             publicationDate: 2026-02-20
+ *             genre: Non-Fiction
+ *             pages: 420
  *     responses:
  *       200:
  *         description: Book updated successfully
@@ -142,7 +178,7 @@ router.post('/books', createBookHandler);
  *       500:
  *         description: Unable to update book
  */
-router.put('/books/:id', updateBookHandler);
+router.put('/books/:id', updateBook);
 
 /**
  * @openapi
@@ -166,7 +202,7 @@ router.put('/books/:id', updateBookHandler);
  *       500:
  *         description: Unable to delete book
  */
-router.delete('/books/:id', deleteBookHandler);
+router.delete('/books/:id', deleteBook);
 
 /**
  * @openapi

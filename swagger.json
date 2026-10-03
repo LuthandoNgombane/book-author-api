@@ -12,6 +12,34 @@
     }
   ],
   "paths": {
+    "/books/analytics": {
+      "get": {
+        "summary": "Retrieve catalog statistics and hierarchical category breakdown",
+        "description": "Demonstrates native ES6 array methods (filter, map, reduce) and recursive taxonomy traversal.",
+        "tags": [
+          "Books"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "genre",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Optional genre to filter statistics"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Analytics calculated successfully"
+          },
+          "500": {
+            "description": "Failed to generate analytics"
+          }
+        }
+      }
+    },
     "/books": {
       "get": {
         "summary": "Get all books",
@@ -56,6 +84,12 @@
                   },
                   "publicationDate": {
                     "type": "string"
+                  },
+                  "genre": {
+                    "type": "string"
+                  },
+                  "pages": {
+                    "type": "number"
                   }
                 }
               },
@@ -63,7 +97,9 @@
                 "id": "b4",
                 "authorId": "a1",
                 "title": "Example Book Title",
-                "publicationDate": "2026-01-15"
+                "publicationDate": "2026-01-15",
+                "genre": "Fiction",
+                "pages": 350
               }
             }
           }
@@ -146,13 +182,21 @@
                   },
                   "publicationDate": {
                     "type": "string"
+                  },
+                  "genre": {
+                    "type": "string"
+                  },
+                  "pages": {
+                    "type": "number"
                   }
                 }
               },
               "example": {
                 "authorId": "a2",
                 "title": "Updated Book Title",
-                "publicationDate": "2026-02-20"
+                "publicationDate": "2026-02-20",
+                "genre": "Non-Fiction",
+                "pages": 420
               }
             }
           }
